@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PETSHOP</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <div class="container">
+        <h1>
+            <img src="dog.png" width="110px" alt="Logo" class="logo">
+            AGENDAMENTO DE BANHO E TOSA
+        </h1>
+
+        <form id="petForm">
+            <label for="petName">Nome do Pet</label>
+            <input type="text" id="petName" placeholder="Nome do Pet" required>
+
+            <label for="petBreed">Raça</label>
+            <input type="text" id="petBreed" placeholder="Raça do Pet" required>
+
+            <label for="ownerName">Dono do Pet</label>
+            <input type="text" id="ownerName" placeholder="Nome do Dono" required>
+
+            <label for="phone">Telefone</label>
+            <input type="tel" id="phone" placeholder="(00) 00000-0000" required>
+
+            <button type="submit">Agendar Pet</button>
+        </form>
+
+        <table id="petTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome do Pet</th>
+                    <th>Raça</th>
+                    <th>Dono do Pet</th>
+                    <th>Telefone</th>
+                    <th>Remover</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Os dados inseridos serão exibidos aqui -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        let petCount = 1; // Contador para ID
+        const form = document.getElementById('petForm');
+        const tableBody = document.querySelector('#petTable tbody');
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Capturar dados do formulário
+            const petName = document.getElementById('petName').value;
+            const petBreed = document.getElementById('petBreed').value;
+            const ownerName = document.getElementById('ownerName').value;
+            const phone = document.getElementById('phone').value;
+
+            // Criar nova linha na tabela
+            const row = document.createElement('tr');
+            row.innerHTML = `
+        <td>${petCount++}</td>
+        <td>${petName}</td>
+        <td>${petBreed}</td>
+        <td>${ownerName}</td>
+        <td>${phone}</td>
+        <td><button class="delete-btn">🗑️</button></td>
+      `;
+
+            // Adicionar linha à tabela
+            tableBody.appendChild(row);
+
+            // Limpar formulário
+            form.reset();
+
+            // Adicionar funcionalidade para remover linha
+            row.querySelector('.delete-btn').addEventListener('click', () => {
+                row.remove();
+            });
+        });
+    </script>
+
+
+</body>
+</html>
